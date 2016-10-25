@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<head>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+  <!-- bs3 Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!--md bs4 -->
+<link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/css/mdb.min.css'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.1.1/js/mdb.min.js'>
+
+<!--[if lt IE 9]>
+  <script type="text/javascript" src="../js/excanvas/excanvas.js"></script>
+<![endif]-->
+<script type="text/javascript" src="js/spinners/spinners.min.js"></script> 
+<!-- optional -->
+<script type="text/javascript" src="js/tipped/tipped.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/tipped/tipped.css" />
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="example/jquery-ui-1.12.1.custom/jquery-ui.css">
+
+<script type='text/javascript'>
+//By creating tooltips after DOM load we make sure that referenced elements are available.
+jQuery(document).ready(function($) {
+  /*
+   * Demonstrations: Skins
+   */
+  Tipped.create("#demo_skins_dark");
+
+
+  /** adrian **/
+  Tipped.create("#adrian",  
+                "<p>How big is your grid?</p><div id=\"slider\" class=\"col-xs-6\" style=\"width: 100\%\"></div>",
+                { skin: 'white',
+                  closeButton: true,
+                  hook: 'topright',
+                  onShow: function(content, element) {
+                    $( "#slider" ).slider();
+                    // content and element are available here 
+                  },
+                  afterUpdate: function(content, element) {
+                    $( "#slider" ).slider({
+                      range: true,
+                      min: -1,
+                      max: 13,
+                      width: 500,
+                      slide: function(event, ui) {
+                        console.log('event: ', event);
+                         console.log('ui: ', ui);
+                         $(".initVal").html($('#slider').slider("values", 0));
+                         $(".finalVal").html($('#slider').slider("values", 1));
+
+
+                         $("#adrian").attr('class', '');
+                         $("#adrian").addClass('col-xs-' + $('#slider').slider("values", 1));
+                         $("#adrian").addClass('col-xs-offset-' + $('#slider').slider("values", 0));
+                      }
+                    });
+
+                   
+
+                    console.log('content: ', content);
+                    console.log('element: ', element);
+                  }
+                }
+                );
+
+
+
+
+
+
+  Tipped.create("#demo_skins_light", { skin: 'light' });
+
+  Tipped.create("#demo_skins_white", { skin: 'white' });
+  Tipped.create("#demo_skins_yellow", { skin: 'yellow' });
+  Tipped.create("#demo_skins_gray", { skin: 'gray' });
+  
+  Tipped.create("#demo_skins_blue", "Skins are optimized to look good on any background", { skin: 'blue' });
+  Tipped.create("#demo_skins_red", "Great for error messages", { skin: 'red' });
+  Tipped.create("#demo_skins_green", "A nice green skin", { skin: 'green' });
+  
+  Tipped.create("#demo_skins_tiny", "Small black tooltips are always useful", { skin: 'tiny' });
+});
+</script>
+
+<link rel="stylesheet" type="text/css" href="example/css/style.css" />
+</head>
+<body>
+<div id='page'>
+
+  <h1>Tipped is installed on this page.</h1>
+
+  <h3> The box below is set to <strong>col-xs-6</strong> </h3>
+  <p>
+  As a user hovering over a bootstrap component(grid)
+  </p>
+  <p>
+    I want to see a popup tooltip that has a ui-slider with range values
+  </p>
+  <p>
+    so that I can adjust the selected element's offset and width
+  </p>
+
+
+  <div class="row">
+    <div class="col-xs-6">
+      <div id='adrian' title='REPLACE ADRIAN TEXT' style="background-color: grey; border: solid; height: 100px">dsdf </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="container">
+      col-xs-offfset-: <p class="initVal">???</p>
+      col-xs-: <p class="finalVal">???</p>
+    </div>
+    <button class="col-xs-5 btn btn-success primary">this does literally nothing</button>
+  </div>
+
+  <br>
+  
+  <div class='demonstrations'>
+    
+      
+    
+
+    
+  
+
+    <div id='demo_skins_dark' title="This is the default skin"><!-- [] --></div>
+    <div id='demo_skins_black' title="The same skin without a radius"><!-- [] --></div>
+    <div id='demo_skins_light' title="A light variant"><!-- [] --></div>
+    
+    <div id='demo_skins_white' title="White is probably the most popular skin"><!-- [] --></div>
+    <div id='demo_skins_gray' title="Gray works with anything"><!-- [] --></div>
+    <div id='demo_skins_yellow' title="The classic yellow tooltip"><!-- [] --></div>
+    
+    <div id='demo_skins_blue'><!-- [] --></div>
+    <div id='demo_skins_red'><!-- [] --></div>
+    <div id='demo_skins_green'><!-- [] --></div>
+    
+    <div id='demo_skins_tiny' class='rightmost'><!-- [] --></div>
+  </div>
+  
+  <h2>What's next?</h2>
+	  <p>Check out the <a href='http://projects.nickstakenburg.com/tipped/documentation' target='_blank'>documentation</a> 
+	  to learn more about customizing tooltips, it has detailed
+	  <a href='http://projects.nickstakenburg.com/tipped/documentation/#installation' target='_blank'>installation instructions</a> 
+	  and examples that will help you get started. 
+  </p>
+
+	<p>Or <a href='http://projects.nickstakenburg.com/tipped/downloadandlicensing' target='_blank'>purchase a license</a>, 
+	   it will give you access to the <span style='font-style:italic'>full version</span> without watermark.</p>
+	
+	<p class='resources'>
+    <strong>Feedback &amp; bugs</strong>: <a href='http://forum.nickstakenburg.com/index.php?p=/categories/tipped' target='_blank'>Tipped Forum</a><br/>
+	  <strong>Updates on twitter</strong>: <a href='http://twitter.com/tippedjs' target='_blank'>@tippedjs</a><br/>
+	</p>
+
+
+</div>
+</body>
+</html>
